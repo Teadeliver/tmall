@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.io.*;
 
+/**
+ * @author littlestar
+ */
 public class ProductImageServlet extends BaseServlet {
     private ProductImageService service = new ProductImageService();
     public String list(HttpServletRequest request, HttpServletResponse response){
@@ -36,7 +39,7 @@ public class ProductImageServlet extends BaseServlet {
         productImage.setType(type);
         service.add(productImage);
         byte[] imgData = new byte[1024*1024*10];
-        String imgPath = request.getServletContext().getRealPath("img/product");
+        String imgPath = request.getServletContext().getRealPath("pictures/product");
         File file = new File(imgPath,productImage.getId()+".jpg");
         file.getParentFile().mkdirs();
         int length = 0;
@@ -48,12 +51,12 @@ public class ProductImageServlet extends BaseServlet {
         }catch (IOException e){
             e.printStackTrace();
         }
-        return "@/admin/productImage_list?pid="+pid;
+        return "@"+request.getServletContext().getContextPath()+"/admin/productImage_list?pid="+pid;
     }
     public String delete(HttpServletRequest request, HttpServletResponse response){
         int piid = Integer.parseInt(request.getParameter("piid"));
         int pid = Integer.parseInt(request.getParameter("pid"));
         service.delete(piid);
-        return "@/admin/productImage_list?pid="+pid;
+        return "@"+request.getServletContext().getContextPath()+"/admin/productImage_list?pid="+pid;
     }
 }

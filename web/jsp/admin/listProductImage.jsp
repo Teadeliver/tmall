@@ -38,7 +38,7 @@
             <c:forEach items="${topImages}" var="ti" varStatus="vs">
                 <tr>
                     <th scope="row">${ti.id}</th>
-                    <td><img src="/pictures/product/${ti.id}.jpg" height="50px"></td>
+                    <td><img src="../pictures/product/${ti.id}.jpg" height="50px"></td>
                     <td><a href="productImage_delete?piid=${ti.id}&pid=${product.id}" class="delete-button"><span
                             class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
@@ -87,7 +87,7 @@
             <c:forEach items="${detailImages}" var="ti" varStatus="vs">
                 <tr>
                     <th scope="row">${ti.id}</th>
-                    <td><img src="/pictures/product/${ti.id}.jpg" height="50px"></td>
+                    <td><img src="../pictures/product/${ti.id}.jpg" height="50px"></td>
                     <td><a href="productImage_delete?piid=${ti.id}&pid=${product.id}" class="delete-button"><span
                             class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>

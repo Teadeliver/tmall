@@ -12,6 +12,7 @@ import java.io.IOException;
 
 /**
  * 本类会处理所有请求，在此分发Servlet方法
+ * @author littlestar
  */
 public class BackServletFilter implements Filter {
     @Override

@@ -25,6 +25,6 @@ public class OrderServlet extends BaseServlet {
         order.setStatus(OrderService.OrderType.WAIT_CONFIRM);
         order.setDeliverDate(new Date());
         service.update(order);
-        return "@/admin/order_list";
+        return "@"+request.getServletContext().getContextPath()+"/admin/order_list";
     }
 }

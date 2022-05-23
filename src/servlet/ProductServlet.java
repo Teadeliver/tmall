@@ -67,7 +67,7 @@ public class ProductServlet extends BaseServlet {
             product.setCategory(category);
             service.add(product);
         }
-        return "@/admin/product_list?cid=" + cid;
+        return "@"+request.getServletContext().getContextPath()+"/admin/product_list?cid=" + cid;
     }
 
     public String edit(HttpServletRequest request, HttpServletResponse response) {
@@ -84,7 +84,7 @@ public class ProductServlet extends BaseServlet {
         int cid = Integer.parseInt(request.getParameter("cid"));
         int pid = Integer.parseInt(request.getParameter("pid"));
         service.delete(pid);
-        return "@/admin/product_list?cid=" + cid;
+        return "@"+request.getServletContext().getContextPath()+"/admin/product_list?cid=" + cid;
     }
 
     public String editPropertyValue(HttpServletRequest request, HttpServletResponse response) {
@@ -124,6 +124,6 @@ public class ProductServlet extends BaseServlet {
                 }
             }
         }
-        return "@/admin/product_editPropertyValue?pid="+pidString;
+        return "@"+request.getServletContext().getContextPath()+"/admin/product_editPropertyValue?pid="+pidString;
     }
 }

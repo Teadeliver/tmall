@@ -38,7 +38,7 @@ public class PropertyServlet extends BaseServlet {
 			property.setCategory(category);
 			service.add(property);
 		}
-        return "@/admin/property_list?cid="+cid;
+        return "@"+request.getServletContext().getContextPath()+"/admin/property_list?cid="+cid;
     }
 	
 	public String edit(HttpServletRequest request, HttpServletResponse response){
