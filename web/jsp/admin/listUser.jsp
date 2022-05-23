@@ -15,7 +15,7 @@
 <%@include file="common/adminNavigator.jsp" %>
 
 
-<div class="container" >
+<div class="container">
     <ol class="breadcrumb">
         <li>用户管理</li>
     </ol>
@@ -23,7 +23,9 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">用户</th>
+            <th scope="col">用户名</th>
+            <th scope="col">用户组</th>
+            <th scope="col">修改用户组</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +34,8 @@
             <tr>
                 <th scope="row">${u.id}</th>
                 <td>${u.name}</td>
+                <td>${u.group}</td>
+<%--                //littlestar TODO : 用户组修改 --%>
             </tr>
         </c:forEach>
         </tbody>
