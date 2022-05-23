@@ -7,12 +7,12 @@ import bean.PropertyValue;
 import org.apache.commons.lang3.StringUtils;
 import service.CategoryService;
 import service.ProductService;
-
 import service.PropertyService;
 import service.PropertyValueService;
 import util.Pagination;
 import util.PaginationUtil;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -21,6 +21,10 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
+@WebServlet(name = "ProductServlet", value = "/productImage.servlet")
 public class ProductServlet extends BaseServlet {
     private ProductService service = new ProductService();
 
@@ -62,12 +66,12 @@ public class ProductServlet extends BaseServlet {
 
         if (pidString != null) {
             service.update(product);
-        }else{
+        } else {
             Category category = new CategoryService().get(cid);
             product.setCategory(category);
             service.add(product);
         }
-        return "@"+request.getServletContext().getContextPath()+"/admin/product_list?cid=" + cid;
+        return "@" + request.getServletContext().getContextPath() + "/admin/product_list?cid=" + cid;
     }
 
     public String edit(HttpServletRequest request, HttpServletResponse response) {
@@ -84,46 +88,47 @@ public class ProductServlet extends BaseServlet {
         int cid = Integer.parseInt(request.getParameter("cid"));
         int pid = Integer.parseInt(request.getParameter("pid"));
         service.delete(pid);
-        return "@"+request.getServletContext().getContextPath()+"/admin/product_list?cid=" + cid;
+        return "@" + request.getServletContext().getContextPath() + "/admin/product_list?cid=" + cid;
     }
 
     public String editPropertyValue(HttpServletRequest request, HttpServletResponse response) {
         int pid = Integer.parseInt(request.getParameter("pid"));
         Product product = service.get(pid);
-        HashMap<Property,PropertyValue> propsMap = new PropertyService().list(product);
-        request.setAttribute("propsMap",propsMap);
-        request.setAttribute("product",product);
+        HashMap<Property, PropertyValue> propsMap = new PropertyService().list(product);
+        request.setAttribute("propsMap", propsMap);
+        request.setAttribute("product", product);
         return "jsp/admin/editPropertyValue.jsp";
     }
+
     public String updatePropertyValue(HttpServletRequest request, HttpServletResponse response) {
         String pidString = request.getParameter("pid");
         int pid = Integer.parseInt(pidString);
         Enumeration<String> paramNames = request.getParameterNames();
         PropertyValueService propertyValueService = new PropertyValueService();
-        while(paramNames.hasMoreElements()){
+        while (paramNames.hasMoreElements()) {
             String paramName = paramNames.nextElement();
             int ptid = 0;
             String value = null;
-            try{
-                ptid = Integer.parseInt(StringUtils.remove(paramName,"ptid_"));
+            try {
+                ptid = Integer.parseInt(StringUtils.remove(paramName, "ptid_"));
                 value = request.getParameter(paramName);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 continue;
             }
-            if(value != null){
-                PropertyValue propertyValue = propertyValueService.get(ptid,pid);
-                if(propertyValue == null){
+            if (value != null) {
+                PropertyValue propertyValue = propertyValueService.get(ptid, pid);
+                if (propertyValue == null) {
                     propertyValue = new PropertyValue();
                     propertyValue.setProduct(new ProductService().get(pid));
                     propertyValue.setProperty(new PropertyService().get(ptid));
                     propertyValue.setValue(value);
                     propertyValueService.add(propertyValue);
-                }else{
+                } else {
                     propertyValue.setValue(value);
                     propertyValueService.update(propertyValue);
                 }
             }
         }
-        return "@"+request.getServletContext().getContextPath()+"/admin/product_editPropertyValue?pid="+pidString;
+        return "@" + request.getServletContext().getContextPath() + "/admin/product_editPropertyValue?pid=" + pidString;
     }
 }

@@ -6,6 +6,7 @@ import util.Pagination;
 import util.PaginationUtil;
 import util.ParseUploadUtil;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -20,6 +21,7 @@ import java.util.Map;
 /**
  * @author littlestar
  */
+@WebServlet(name = "CategoryServlet", value = "/category.servlet")
 public class CategoryServlet extends BaseServlet {
     private final CategoryService service = new CategoryService();
 

@@ -1,11 +1,13 @@
 package servlet;
 
 import bean.*;
-import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import service.*;
 import util.PasswordUtil;
 import util.ProductSort;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -15,7 +17,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author littlestar
+ */
 @SuppressWarnings("deprecation")
+@WebServlet(name = "FrontServlet", value = "/front.servlet")
 public class FrontServlet extends BaseServlet {
     public String home(HttpServletRequest request, HttpServletResponse response) {
         List<Category> categories = new CategoryService().listInHome();

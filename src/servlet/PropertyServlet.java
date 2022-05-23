@@ -7,12 +7,17 @@ import service.PropertyService;
 import util.Pagination;
 import util.PaginationUtil;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
+@WebServlet(name = "PropertyServlet" ,value="/property.servlet")
 public class PropertyServlet extends BaseServlet {
-    private PropertyService service = new PropertyService();
+    private final PropertyService service = new PropertyService();
     public String list(HttpServletRequest request, HttpServletResponse response){
         int cid = Integer.parseInt(request.getParameter("cid"));
         Pagination pagination = PaginationUtil.createPagination(request,service.getTotal(cid));

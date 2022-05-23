@@ -5,11 +5,16 @@ import service.OrderService;
 import util.Pagination;
 import util.PaginationUtil;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
+@WebServlet(name = "OrderServlet", value = "/order.servlet")
 public class OrderServlet extends BaseServlet {
     private OrderService service = new OrderService();
 
