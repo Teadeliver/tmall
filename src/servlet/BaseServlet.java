@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 
+/**
+ * @author littlestar
+ */
 public abstract class BaseServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,10 +24,11 @@ public abstract class BaseServlet extends HttpServlet {
             String redirect = m.invoke(this,req,resp).toString();
             if(redirect.startsWith("@")){
                 resp.sendRedirect(redirect.substring(1));
-            }else if(redirect.startsWith("%"))
+            }else if(redirect.startsWith("%")) {
                 resp.getWriter().print(redirect.substring(1));
-            else
+            } else {
                 req.getRequestDispatcher(redirect).forward(req, resp);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

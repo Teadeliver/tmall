@@ -5,8 +5,11 @@ import dao.CartItemDAO;
 
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
 public class CartItemService {
-    private CartItemDAO dao = new CartItemDAO();
+    private final CartItemDAO dao = new CartItemDAO();
     public int getTotal(int uid){return dao.getTotal(uid);}
     public void add(CartItem bean) {
         dao.add(bean);

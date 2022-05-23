@@ -14,8 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * @author littlestar
+ */
 public class CategoryServlet extends BaseServlet {
-    private CategoryService service = new CategoryService();
+    private final CategoryService service = new CategoryService();
     public String list(HttpServletRequest request,HttpServletResponse response)
     {
         Pagination pagination = PaginationUtil.createPagination(request,service.getTotal());

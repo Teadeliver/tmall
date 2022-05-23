@@ -17,7 +17,7 @@
                 <li class="${light==1?'active':''}"><a  href="category_list">分类管理</a></li>
                 <li class="${light==2?'active':''}"><a  href="user_list">用户管理</a></li>
                 <li class="${light==3?'active':''}"><a href="order_list">订单管理</a></li>
-                <li class=""><a href="/" target="_blank">访问前台</a></li>
+                <li class=""><a href="<c:url value="/"/>" target="_blank">访问前台</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
