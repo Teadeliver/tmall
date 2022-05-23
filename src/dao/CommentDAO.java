@@ -1,8 +1,8 @@
 package dao;
 
 import bean.Comment;
-import util.DbUtil;
 import util.DateUtil;
+import util.DbUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class CommentDAO {
         String sql = "SELECT count(*) FROM comment WHERE pid=? and deleteAt IS NULL";
         try (Connection c = DbUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1,pid);
+            ps.setInt(1, pid);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt(1);
@@ -58,38 +58,41 @@ public class CommentDAO {
             e.printStackTrace();
         }
     }
-    public void update(Comment bean){
+
+    public void update(Comment bean) {
         String sql = "update comment set pid = ? , uid = ? ,content = ?,createDate = ? where deleteAt is null and id = ?";
-        try(Connection c = DbUtil.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
+        try (Connection c = DbUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setInt(1, bean.getProduct().getId());
             ps.setInt(2, bean.getUser().getId());
             ps.setString(3, bean.getContent());
             ps.setTimestamp(4, DateUtil.d2t(bean.getCreateDate()));
             ps.execute();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void delete(int id){
+
+    public void delete(int id) {
         String sql = "update comment set deleteAt = ? where deleteAt is null and id = ?";
-        try(Connection c = DbUtil.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
+        try (Connection c = DbUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setTimestamp(1, DateUtil.nowTimestamp());
-            ps.setInt(2,id);
+            ps.setInt(2, id);
             ps.execute();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public Comment get(int id){
+
+    public Comment get(int id) {
         Comment bean = null;
         String sql = "select * from comment where deleteAt is null and id=?";
-        try(Connection c = DbUtil.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setInt(1,id);
+        try (Connection c = DbUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 bean = new Comment();
                 bean.setId(rs.getInt("id"));
                 bean.setUser(new UserDAO().get(rs.getString("value")));
@@ -97,43 +100,44 @@ public class CommentDAO {
                 bean.setContent(rs.getString("content"));
                 bean.setCreateDate(DateUtil.t2d(rs.getTimestamp("createDate")));
             }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return bean;
-    }
-    public Comment get(int pid,int uid){
-        Comment bean = null;
-        String sql = "select * from comment where deleteAt is null and pid=? and uid = ?";
-        try(Connection c = DbUtil.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setInt(1,pid);
-            ps.setInt(2,uid);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                bean = new Comment();
-                bean.setId(rs.getInt("id"));
-                bean.setUser(new UserDAO().get(rs.getString("value")));
-                bean.setProduct(new ProductDAO().get(rs.getInt("pid")));
-                bean.setContent(rs.getString("content"));
-                bean.setCreateDate(DateUtil.t2d(rs.getTimestamp("createDate")));
-            }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return bean;
     }
 
-    public List<Comment> list(int pid,int start , int count){
+    public Comment get(int pid, int uid) {
+        Comment bean = null;
+        String sql = "select * from comment where deleteAt is null and pid=? and uid = ?";
+        try (Connection c = DbUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, pid);
+            ps.setInt(2, uid);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                bean = new Comment();
+                bean.setId(rs.getInt("id"));
+                bean.setUser(new UserDAO().get(rs.getString("value")));
+                bean.setProduct(new ProductDAO().get(rs.getInt("pid")));
+                bean.setContent(rs.getString("content"));
+                bean.setCreateDate(DateUtil.t2d(rs.getTimestamp("createDate")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bean;
+    }
+
+    public List<Comment> list(int pid, int start, int count) {
         List<Comment> beans = new ArrayList<>();
         String sql = "select * from comment where `pid`=? and deleteAt is null ORDER BY id DESC limit ?,?";
-        try(Connection c = DbUtil.getConnection();
-            PreparedStatement ps = c.prepareStatement(sql)){
-            ps.setInt(1,pid);
-            ps.setInt(2,start);
-            ps.setInt(3,count);
+        try (Connection c = DbUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, pid);
+            ps.setInt(2, start);
+            ps.setInt(3, count);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Comment bean = new Comment();
                 bean.setId(rs.getInt("id"));
                 bean.setUser(new UserDAO().get(rs.getInt("uid")));
@@ -142,9 +146,14 @@ public class CommentDAO {
                 bean.setCreateDate(DateUtil.t2d(rs.getTimestamp("createDate")));
                 beans.add(bean);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return beans;
+    }
+
+    public List<Comment> list() {
+        //littlestar TODO :  所有评论信息的获取
+        return null;
     }
 }

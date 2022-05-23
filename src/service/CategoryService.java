@@ -7,6 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
 public class CategoryService {
     private CategoryDAO dao = new CategoryDAO();
     public int getTotal() {return dao.getTotal();}
