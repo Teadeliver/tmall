@@ -61,6 +61,9 @@ public class FrontServlet extends BaseServlet {
         return "jsp/login.jsp";
     }
 
+    /**
+     * littlestar FIXME :    跳转有问题
+     */
     public String loginIn(HttpServletRequest request, HttpServletResponse response) {
         String refer = request.getParameter("refer");
         String name = request.getParameter("name");
