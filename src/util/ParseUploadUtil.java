@@ -6,14 +6,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author littlestar
- */
 public class ParseUploadUtil {
     /**
      *
@@ -34,7 +30,7 @@ public class ParseUploadUtil {
                 } else {
                     String paramName = item.getFieldName();
                     String paramValue = item.getString();
-                    paramValue = new String(paramValue.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+                    paramValue = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");
                     params.put(paramName, paramValue);
                 }
             }

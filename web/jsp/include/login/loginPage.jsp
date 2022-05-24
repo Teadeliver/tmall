@@ -38,7 +38,7 @@
                     <span class=" glyphicon glyphicon-lock"></span>
                 </span>
                     <input type="password" placeholder="密码" name="password" id="password">
-                    <input type="hidden" name="refer" id="refer" value="${refer}">
+                    <input type="hidden" name="refer" id="refer">
             </div>
             <div class=" login-button">
                     <button type="submit" class="login-button">登 录</button>

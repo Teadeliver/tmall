@@ -25,11 +25,11 @@ public class PaginationUtil {
         StringBuilder param = new StringBuilder();
 
         //非Pagination的参数，生成param参数
-        Enumeration<String> enu=request.getParameterNames();
+        Enumeration enu=request.getParameterNames();
         while(enu.hasMoreElements()){
             String paraName=(String)enu.nextElement();
             //start写在jsp里面
-            if(!"pageStart".equals(paraName)) {
+            if(!paraName.equals("pageStart")) {
                 param.append('&').append(paraName).append("=").append(request.getParameter(paraName));
             }
         }
