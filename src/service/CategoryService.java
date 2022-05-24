@@ -12,7 +12,10 @@ import java.util.List;
  */
 public class CategoryService {
     private CategoryDAO dao = new CategoryDAO();
-    public int getTotal() {return dao.getTotal();}
+
+    public int getTotal() {
+        return dao.getTotal();
+    }
     public void add(Category bean) {
         dao.add(bean);
     }

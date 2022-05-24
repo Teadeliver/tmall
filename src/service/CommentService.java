@@ -11,6 +11,10 @@ import java.util.List;
 public class CommentService {
     private CommentDAO dao = new CommentDAO();
 
+    public int getTotal() {
+        return dao.getTotal();
+    }
+
     public int getTotalByProduct(int pid) {
         return dao.getTotalByProduct(pid);
     }

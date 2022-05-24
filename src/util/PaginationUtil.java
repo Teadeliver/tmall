@@ -3,6 +3,9 @@ package util;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
+/**
+ * @author littlestar
+ */
 public class PaginationUtil {
     public static Pagination createPagination(HttpServletRequest request,int total){
         //获取Pagination本身的两个参数

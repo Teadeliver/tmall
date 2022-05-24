@@ -8,6 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
 public class CommentDAO {
     public int getTotal() {
         int total = 0;
@@ -59,6 +62,13 @@ public class CommentDAO {
         }
     }
 
+    /**
+     * @return void
+     * @Author TeaDeliver
+     * @Description //TODO
+     * @Date 11:41 2022/5/24
+     * @Param [bean]
+     **/
     public void update(Comment bean) {
         String sql = "update comment set pid = ? , uid = ? ,content = ?,createDate = ? where deleteAt is null and id = ?";
         try (Connection c = DbUtil.getConnection();
@@ -152,8 +162,25 @@ public class CommentDAO {
         return beans;
     }
 
-    public List<Comment> list() {
-        //littlestar TODO :  所有评论信息的获取
-        return null;
+    public List<Comment> list(){
+//        littlestar TODO :  所有评论信息的获取
+        List<Comment> beans = new ArrayList<>();
+        String sql = "select * from comment where deleteAt is null";
+        try (Connection c = DbUtil.getConnection();
+             Statement s = c.createStatement()) {
+            ResultSet rs = s.executeQuery(sql);
+            while (rs.next()) {
+                Comment bean = new Comment();
+                bean.setId(rs.getInt("id"));
+                bean.setUser(new UserDAO().get(rs.getInt("uid")));
+                bean.setProduct(new ProductDAO().get(rs.getInt("pid")));
+                bean.setContent(rs.getString("content"));
+                bean.setCreateDate(DateUtil.t2d(rs.getTimestamp("createDate")));
+                beans.add(bean);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return beans;
     }
 }

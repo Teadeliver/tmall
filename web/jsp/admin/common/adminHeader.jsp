@@ -13,7 +13,7 @@
 <head>
     <title>${title} - 商城后台</title>
     <meta charset="utf-8">
-    <script src="<c:url value="/js/jquery-3.2.1.min.js"/>"></script>
+    <script src="<c:url value="/js/jquery-3.5.1.js"/>"></script>
     <script src="<c:url value="/js/bootstrap.js"/>"></script>
     <script src="<c:url value="/js/admin.js"/>"></script>
     <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">

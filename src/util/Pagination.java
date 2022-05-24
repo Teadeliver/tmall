@@ -54,8 +54,9 @@ public class Pagination {
     public int getTotalPage(){
         int totalPage = total / count-1;
         // 如果total不能被count整除，或者为0，还要把余下的项目放到最后一页
-        if(total % count != 0 || total == 0)
+        if(total % count != 0 || total == 0) {
             totalPage = total/count;
+        }
         return totalPage;
     }
 

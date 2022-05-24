@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author littlestar
+ */
 public class CartItemDAO {
     public int getTotal(int uid) {
         int total = 0;

@@ -1,6 +1,7 @@
 package servlet;
 
-import bean.Category;
+import bean.Comment;
+import service.CommentService;
 import util.Pagination;
 import util.PaginationUtil;
 
@@ -14,14 +15,19 @@ import java.util.List;
  */
 @WebServlet(name = "CommentServlet", value = "/comment.servlet")
 public class CommentServlet extends BaseServlet {
-    private final CommentServlet service = new CommentServlet();
+    private final CommentService service = new CommentService();
 
     public String list(HttpServletRequest request, HttpServletResponse response) {
         Pagination pagination = PaginationUtil.createPagination(request, service.getTotal());
-        List<Category> comments = service.list(pagination.getStart(), pagination.getCount());
+        List<Comment> comments = service.list();
         request.setAttribute("comments", comments);
         request.setAttribute("pagination", pagination);
-        return "jsp/admin/listCategory.jsp";
+        return "jsp/admin/listComment.jsp";
     }
 
+    public String delete(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("cid"));
+        service.delete(id);
+        return "@"+request.getServletContext().getContextPath()+"/admin/comment_list";
+    }
 }
