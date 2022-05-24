@@ -16,7 +16,7 @@ import java.util.List;
  */
 @WebServlet(name = "OrderServlet", value = "/order.servlet")
 public class OrderServlet extends BaseServlet {
-    private OrderService service = new OrderService();
+    private final OrderService service = new OrderService();
 
     public String list(HttpServletRequest request, HttpServletResponse response) {
         Pagination pagination = PaginationUtil.createPagination(request, service.getTotal());

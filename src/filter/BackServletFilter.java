@@ -77,7 +77,7 @@ public class BackServletFilter implements Filter {
                     throw new ServletException("权限不足，请确保有superAdmin权限");
                 }
             }
-            response.sendRedirect("/login?refer=admin");
+            response.sendRedirect(request.getServletContext().getContextPath()+"/login?refer=admin");
             return;
         }
 

@@ -75,7 +75,7 @@ public class FrontServlet extends BaseServlet {
             return "jsp/login.jsp";
         }
         request.getSession().setAttribute("user", user);
-        if (refer == null || refer.equals("")) {
+        if (refer == null || "".equals(refer)) {
             refer = "/";
         }
         return "@" + refer;
@@ -225,8 +225,9 @@ public class FrontServlet extends BaseServlet {
 
     public String changeCartNum(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("user");
-        if (null == user)
+        if (null == user) {
             return "%fail";
+        }
         int ciid = Integer.parseInt(request.getParameter("ciid"));
         int num = Integer.parseInt(request.getParameter("num"));
         List<CartItem> cartItems = new CartItemService().listByUser(user.getId());

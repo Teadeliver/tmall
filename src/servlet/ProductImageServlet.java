@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @WebServlet(name = "ProductImageServlet", value = "/product.servlet")
 public class ProductImageServlet extends BaseServlet {
-    private ProductImageService service = new ProductImageService();
+    private final ProductImageService service = new ProductImageService();
 
     public String list(HttpServletRequest request, HttpServletResponse response) {
         int pid = Integer.parseInt(request.getParameter("pid"));
